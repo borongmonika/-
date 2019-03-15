@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { maxHeaderSize } from 'http';
 
 class TodoList extends Component {
   constructor(props){
@@ -7,25 +8,37 @@ class TodoList extends Component {
       list:[
         'gogo',
         'gogo1'
-          ]
+          ],
+      inputValue:''
     }
   }
   handleBtnClick(){
     this.setState({
-      list: [...this.state.list,'jojo']
+      list: [...this.state.list,this.state.inputValue],
+      inputValue:''
     })
-    
-   
+  }
+  handleInputChange(e){
+    this.setState({
+      inputValue:e.target.value
+    })
+  }
+  handleItemClick(index){
+    const list = [...this.state.list]
+    list.splice(index,1);
+    this.setState({list})
+
   }
   render() {
     return (
       <div>
         <div>
-          <input /><button onClick={this.handleBtnClick.bind(this)}>add</button>
+          <input value={this.state.inputValue} onChange={this.handleInputChange.bind(this)}/>
+          <button onClick={this.handleBtnClick.bind(this)}>add</button>
         </div>
         <ul>
           {this.state.list.map((item,index)=>{
-            return <li key = {index}>{item}</li>
+            return <li onClick={this.handleItemClick.bind(this, index)} key = {index}>{item}</li>
           })}
         </ul>
       </div>
