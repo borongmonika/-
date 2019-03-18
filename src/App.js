@@ -1,3 +1,4 @@
+import React,{Component} from 'react';
 
 
 
@@ -26,7 +27,6 @@ class Go extends Component {
         return (
             <div>
                 <h2>{this.props.name}:rua!</h2>
-                <Button></Button>
                 <ul>
                     {this.state.solders.map((num,index)=>{
                         return <li key={index}>{num}</li>
