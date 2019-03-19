@@ -1,92 +1,52 @@
-import React,{} from 'react';
-import {} from 'antd';
-function BoilingVerdict(props){
-    if(props.celsius >= 100){
-        return <p>open</p>
-    }
-    return <p>close</p>   
-}
-function toCelsius(fahrenheit){
-    return (fahrenheit - 32)* 5/ 9;
-}
-function toFahrenheit(celsiue){
-    return (celsiue * 9 / 5) + 32;
-}
-function tryConvert(temperature, convert){
-    const input = parseFloat(temperature);
-    if (Number.isNaN(input)){
-        return '';
-    }
-const output = convert(input);
-const rounded  = Math.round(output * 1000) /1000;
-return rounded.toString();
-}
+import React, { Component } from 'react';
 
-const scaleNames = {
-    c:'111',
-    f:'222'
+function BoilingVerdict(props) {
+    if (props.celsius >= 100) {
+        return <p>hot</p>;
+    }
+    return <p>cool</p>;
 }
-class TemperatureInput extends React.Component {
+const scalName = {
+    c: 'fg',
+    f: 'xg'
+}
+class TemperatureInput extends Component {
     constructor(props) {
-      super(props);
-      this.handleChange = this.handleChange.bind(this);
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = { temperature: '' }
     }
-  
     handleChange(e) {
-      this.props.onTemperatureChange(e.target.value);
+        this.setState({ temperature: e.target.value })
     }
-  
     render() {
-      const temperature = this.props.temperature;
-      const scale = this.props.scale;
-      return (
-        <fieldset>
-          <legend>在{scaleNames[scale]}:中输入温度数值</legend>
-          <input value={temperature}
-                 onChange={this.handleChange} />
-        </fieldset>
-      );
-    }
-  }
-class Calculator extends React.Component {
-    constructor(props) {
-      super(props);
-      this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
-      this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
-      this.state = {temperature: '', scale: 'c'};
-    }
-  
-    handleCelsiusChange(temperature) {
-      this.setState({scale: 'c', temperature});
-    }
-  
-    handleFahrenheitChange(temperature) {
-      this.setState({scale: 'f', temperature});
-    }
-  
-    render() {
-      const scale = this.state.scale;
-      const temperature = this.state.temperature;
-      const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
-      const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
-  
-      return (
-        <div>
-          <TemperatureInput
-            scale="c"
-            temperature={celsius}
-            onTemperatureChange={this.handleCelsiusChange} />
-  
-          <TemperatureInput
-            scale="f"
-            temperature={fahrenheit}
-            onTemperatureChange={this.handleFahrenheitChange} />
-  
-          <BoilingVerdict
-            celsius={parseFloat(celsius)} />
-  
+        const temperature = this.state.temperature;
+        const scal = this.props.scal;
+        return (<div>
+            <legend>输入温度{scalName[scal]}</legend>
+
+            <input
+                value={temperature}
+                onChange={this.handleChange}
+            />
+            <BoilingVerdict
+                celsius={parseFloat(temperature)}
+            />
         </div>
-      );
+
+        )
     }
-  }
+}
+class Calculator extends Component {
+
+    render() {
+
+        return (
+            <div>
+                <TemperatureInput scal='c'/>
+                <TemperatureInput scal='f'/>
+            </div>
+        )
+    }
+}
 export default Calculator;
