@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // import TodoList from './TodoList';
-import App from './App';
+import Calculator from './Rua';
 
-ReactDOM.render(<App/>,document.getElementById('root'));
+ReactDOM.render(<Calculator/>,document.getElementById('root'));
