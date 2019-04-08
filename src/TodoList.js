@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import TodoItem from './TodoItem';
 class TodoList extends Component {
   constructor(props) {
+    
     super(props);
     this.state = {
       inputValue: '',
@@ -20,12 +21,41 @@ class TodoList extends Component {
     //   inputValue: e.target.value
     // })
   }
+  // //在组件即将被挂载到页面时自动执行componentWillMount
+  // componentWillMount() {
+  //   console.log('componentWillMount')
+  // }
+  // //在组件被挂载到页面时自动执行componentDidMount
+  // componentDidMount() {
+  //   console.log('componentDidMount')
+  // }
+  // //componetWillMount--render--componetDidMount
+  // //组件被更新之前，会自动更新shouldComponentUpdate，返回值为boolean 继续执行:不执行
+  // shouldComponentUpdate() {
+  //   console.log('shouldComponentUpdate')
+  //   return true;
+  // }
+  // //组件被更新之前，会自动更新componentWillUpdate,在shouldComponetUpdate后执行
+  // //如果shouldComponentUpdate返回true执行componentWillUpdate
+  // //返回false则componentWillUpdate不执行
+  // componentWillUpdate() {
+  //   console.log('componentWillUpdate')
+  // }
+  // //组件更新之后，执行componentDidUpdate
+  // componentDidUpdate() {
+  //   console.log('componentDidUpdate')
+  // }
+ 
   handelBtnClick() {
     //prevState = this.state
     this.setState((prevState) => ({
       list: [...prevState.list, prevState.inputValue],
       inputValue: ''
-    }))
+    })
+    // ,() =>{
+    //   console.log(this.ul.querySelectorAll('div').length);
+    // }
+    )
     // this.setState(() => ({
     //   list: [...this.state.list, this.state.inputValue],
     //   inputValue: ''
@@ -34,6 +64,7 @@ class TodoList extends Component {
     //   list: [...this.state.list, this.state.inputValue],
     //   inputValue: ''
     // })
+   
     console.log('添加成功:' + this.state.inputValue)
   }
   handelItemDelete(index) {
@@ -70,7 +101,7 @@ class TodoList extends Component {
     })
   }
   render() {
-
+    // console.log('render')
     return (
       <Fragment>
         <div>
@@ -79,10 +110,13 @@ class TodoList extends Component {
             id='insertArea'
             value={this.state.inputValue}
             onChange={this.handelInputChange}
+            // ref={(input)=>{this.input = input}}
           />
           <button onClick={this.handelBtnClick}>RUA!</button>
         </div>
-        <ul>
+        <ul 
+        // ref={(ul) => {this.ul = ul}}
+        >
          {this.getTodoItem()}
         </ul>
       </Fragment>
