@@ -22,7 +22,15 @@ class TodoItem extends Component {
 	// componentWillUnmount() {
 	// 	console.log('componentWillUnmount')
 	// }
+	shouldComponentUpdate(nextProps, mextState) {
+		if(nextProps.content !== this.props.content){
+			return true;
+		}else{
+			return false
+		}
+	}
 	render() {
+		
 		// console.log('child render')
 		console.log('wrrr')
 		const { content
