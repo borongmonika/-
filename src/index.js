@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import AntTodoList from './AntTodoList';
+import Todolist from './AntTodoList';
 // import Calculator from './Rua';
 // import FancyBorder from './SidebarDialog';
 
-ReactDOM.render(<AntTodoList/>,document.getElementById('root'));
+ReactDOM.render(<Todolist/>,document.getElementById('root'));
