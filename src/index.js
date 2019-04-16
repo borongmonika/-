@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import Todolist from './AntTodoList';
+import { Provider } from 'react-redux';
+import Todolist from './newTodoList';
+import store from './store';
 // import Calculator from './Rua';
 // import FancyBorder from './SidebarDialog';
+const App = (
+    <Provider store={store}>
+        <Todolist />
+    </Provider>
+);
 
-ReactDOM.render(<Todolist/>,document.getElementById('root'));
+ReactDOM.render(App ,document.getElementById('root'));
